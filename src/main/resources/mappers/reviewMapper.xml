@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.jinw0909.spring.lesson03.dao.ReviewDAO">
+ 
+ 	<!-- usedGoods 데이터 모두 가져오기 쿼리 -->
+ 	<select id="selectReview" resultType="com.jinw0909.spring.lesson03.model.Review" 
+ 	parameterType="int">
+ 		SELECT 
+ 			`id`
+ 			, `storeId`
+ 			, `menu`
+ 			, `userName`
+ 			, `point`
+ 			, `review`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM 
+ 			`new_review`
+ 		WHERE
+ 			`id` = #{id}
+ 	</select>
+ 	
+ 	<insert id="insertReview" parameterType="map">
+ 		INSERT INTO `new_review` 
+ 		(
+ 			`storeId`
+ 			, `menu`
+ 			, `userName`
+ 			, `point`
+ 			, `review`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		) VALUES (
+ 			#{storeId}
+ 			, #{menu}
+ 			, #{userName}
+ 			, #{point}
+ 			, #{review}
+ 			, now()
+ 			, now()
+ 		)
+ 	</insert>
+ 	
+ 	<insert id="insertReviewFromObject" parameterType="com.jinw0909.spring.lesson03.model.Review">
+ 		INSERT INTO `new_review` 
+ 		(
+ 			`storeId`
+ 			, `menu`
+ 			, `userName`
+ 			, `point`
+ 			, `review`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		) VALUES (
+ 			#{storeId}
+ 			, #{menu}
+ 			, #{userName}
+ 			, #{point}
+ 			, #{review}
+ 			, now()
+ 			, now()
+ 		)
+ 	</insert>
+ 	
+ 	<update id="updateReviewById" parameterType="map">
+ 		UPDATE
+ 			`new_review`
+ 		SET
+ 			`review` = #{review}
+ 		WHERE
+ 			`id` = 
+ 	</update>
+ 	
+ 	<delete id="deleteReviewById" parameterType="int">
+ 		DELETE FROM
+ 			`new_review`
+ 		WHERE
+ 			`id` = #{id}
+ 	</delete>
+ 	
+ </mapper>
